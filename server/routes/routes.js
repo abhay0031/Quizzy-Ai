@@ -1,6 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const { authMiddleware, adminMiddleware } = require("../middleware/Auth");
+
+
+const express = require("express")
+const router = express.Router()
+const { authMiddleware, adminMiddleware } = require("../middleware/Auth")
 
 // Import Controllers
 const {
@@ -13,43 +15,48 @@ const {
   getUserAttempts,
   getAdminQuizes,
   getQuizAttempts,
-} = require("../controllers/quizController");
+} = require("../controllers/quizController")
 
 const {
   createQuestion,
   updateQuestion,
   deleteQuestion,
   getQuizQuestions,
-} = require("../controllers/questionController");
+} = require("../controllers/questionController")
+const notesRoutes = require("./notesRoutes"); 
 
-const { login, register } = require("../controllers/userController");
+
+const { login, register, requestOTP, verifyOTP } = require("../controllers/userController")
 
 // User Authentication
-router.post("/login", login);
-router.post("/register", register);
+router.post("/login", login)
+router.post("/register", register)
+
+// New OTP routes
+router.post("/request-otp", requestOTP)
+router.post("/verify-otp", verifyOTP)
 
 // Quiz routes
-router.get("/admin-quizzes", authMiddleware, adminMiddleware, getAdminQuizes);
-router.get("/attempts/:id", authMiddleware, adminMiddleware, getQuizAttempts);
-router.post("/quizzes", authMiddleware, adminMiddleware, createQuiz);
-router.put("/quizzes/:id", authMiddleware, adminMiddleware, updateQuiz);
-router.delete("/quizzes/:id", authMiddleware, adminMiddleware, deleteQuiz);
+router.get("/admin-quizzes", authMiddleware, adminMiddleware, getAdminQuizes)
+router.get("/attempts/:id", authMiddleware, adminMiddleware, getQuizAttempts)
+router.post("/quizzes", authMiddleware, adminMiddleware, createQuiz)
+router.put("/quizzes/:id", authMiddleware, adminMiddleware, updateQuiz)
+router.delete("/quizzes/:id", authMiddleware, adminMiddleware, deleteQuiz)
 
 // question routes
-router.get("/questions/:id", authMiddleware, getQuizQuestions);
-router.post("/questions", authMiddleware, adminMiddleware, createQuestion);
-router.put("/questions/:id", authMiddleware, adminMiddleware, updateQuestion);
-router.delete(
-  "/questions/:id",
-  authMiddleware,
-  adminMiddleware,
-  deleteQuestion
-);
+router.get("/questions/:id", authMiddleware, getQuizQuestions)
+router.post("/questions", authMiddleware, adminMiddleware, createQuestion)
+router.put("/questions/:id", authMiddleware, adminMiddleware, updateQuestion)
+router.delete("/questions/:id", authMiddleware, adminMiddleware, deleteQuestion)
 
 // data routes
-router.get("/quizzes", authMiddleware, getAllQuizzes);
-router.get("/quizzes/:id", authMiddleware, getQuizById);
-router.post("/quizzes/:id/attempt", authMiddleware, attemptQuiz);
-router.get("/attempts", authMiddleware, getUserAttempts);
+router.get("/quizzes", authMiddleware, getAllQuizzes)
+router.get("/quizzes/:id", authMiddleware, getQuizById)
+router.post("/quizzes/:id/attempt", authMiddleware, attemptQuiz)
+router.get("/attempts", authMiddleware, getUserAttempts)
 
-module.exports = router;
+
+router.use("/notes", notesRoutes);
+
+module.exports = router
+
