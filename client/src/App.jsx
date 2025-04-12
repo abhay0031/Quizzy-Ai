@@ -12,6 +12,9 @@ import AttemptQuiz from "./pages/AttemptQuiz"
 import QuizResult from "./pages/QuizResult"
 import { useSelector } from "react-redux"
 import History from "./pages/History"
+import Notes from "./pages/Notes"
+import AdminNotes from "./pages/AdminNotes"
+import CreateNotes from "./pages/CreateNotes"
 
 function App() {
 
@@ -26,6 +29,8 @@ function App() {
           <Route path="/quiz-results" element={<LoggedInRoutes><QuizResult /></LoggedInRoutes>} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/notes" element={<LoggedInRoutes><Notes /></LoggedInRoutes>} />
+
           <Route path="/dashboard">
             <Route index element={<LoggedInRoutes><DashboardLayout><Profile /></DashboardLayout></LoggedInRoutes>} />
             <Route path="history" element={<LoggedInRoutes><DashboardLayout><History /></DashboardLayout ></LoggedInRoutes>} />
@@ -33,6 +38,9 @@ function App() {
             <Route path="create-quiz/:id" element={<LoggedInRoutes><DashboardLayout><CreateQuestions /></DashboardLayout ></LoggedInRoutes>} />
             <Route path="quizes" element={<LoggedInRoutes><DashboardLayout><AdminQuizes /></DashboardLayout></LoggedInRoutes>} />
             <Route path="edit-quiz/:id" element={<LoggedInRoutes><DashboardLayout><CreateQuiz /></DashboardLayout></LoggedInRoutes>} />
+            <Route path="notes" element={<LoggedInRoutes><DashboardLayout><AdminNotes /></DashboardLayout></LoggedInRoutes>} />
+                        <Route path="create-notes" element={<LoggedInRoutes><DashboardLayout><CreateNotes /></DashboardLayout></LoggedInRoutes>} />
+                        <Route path="edit-notes/:id" element={<LoggedInRoutes><DashboardLayout><CreateNotes /></DashboardLayout></LoggedInRoutes>} />
           </Route>
         </Routes>
       </div>
