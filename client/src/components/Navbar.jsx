@@ -14,6 +14,9 @@ const Navbar = () => {
                 <NavLink to={"/dashboard"} className={({ isActive }) => isActive === true ? "text-green-600" : "text-white"}>
                     Dashboard
                 </NavLink>
+                <NavLink to={"/notes"} className={({ isActive }) => isActive === true ? "text-green-600" : "text-white"}>
+                    Notes
+                </NavLink>
             </div>
         </div>
     )

@@ -1,3 +1,4 @@
+
 import { useLocation } from 'react-router-dom'
 import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
@@ -27,11 +28,13 @@ const DashboardLayout = ({ children }) => {
                             <Link to={"/dashboard/quizes"} className={`hover:bg-slate-700 transition-all duration-300 px-3 py-1 rounded-full ${location.pathname.includes("quizes") && "bg-slate-600"}`}>
                                 Quizes
                             </Link>
+                            <Link to={"/dashboard/notes"} className={`hover:bg-slate-700 transition-all duration-300 px-3 py-1 rounded-full ${location.pathname.includes("notes") && "bg-slate-600"}`}>
+                                Notes
+                            </Link>
                         </> : <>
                             <Link to={"/dashboard/history"} className={`hover:bg-slate-700 transition-all duration-300 px-3 py-1 rounded-full ${location.pathname.includes("history") && "bg-slate-600"}`}>
                                 History
                             </Link>
-
                         </>
                     }
                 </span>
