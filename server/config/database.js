@@ -1,15 +1,19 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 require("dotenv").config();
 
-exports.connectToDB = () => {
-    mongoose.connect("mongodb+srv://Myusername:admin@mycluster.stkyauo.mongodb.net/quizzy?retryWrites=true&w=majority&appName=MyCluster",{})
-    mongoose.connect("mongodb://localhost:27017/quizzy",{})
-    .then(() => {
-        console.log("Database connection successfull")
-    })
-    .catch((e) => {
-        console.log("Error occurred while connecting to DB")
-        console.error(e);
-        process.exit(1);
-    })
-} 
+exports.connectToDB = async () => {
+  try {
+    const dbUri = process.env.MONGODB_URI || "mongodb://localhost:27017/quizzy";
+    
+    await mongoose.connect(dbUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("✅ Successfully connected to the database");
+  } catch (error) {
+    console.error("❌ Database connection failed");
+    console.error(error);
+    process.exit(1);
+  }
+};
