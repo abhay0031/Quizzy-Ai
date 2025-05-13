@@ -1,3 +1,6 @@
+
+
+
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
@@ -12,6 +15,14 @@ const quizSchema = new mongoose.Schema({
     },
     timer: {
       type: Number, // in minutes
+      required: true
+    },
+    semester: {
+      type: Number,
+      required: true
+    },
+    type: {
+      type: String,
       required: true
     },
     createdBy: {

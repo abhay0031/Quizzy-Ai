@@ -4,12 +4,14 @@ const Attempt = require("../models/Attempt");
 const User = require("../models/User");
 
 // ✅
+
+
 exports.createQuiz = async (req, res) => {
   try {
-    const { title, description, timer } = req.body;
+    const { title, description, timer, semester, type } = req.body;
     const user = req.user;
 
-    if (!title || !description || !timer) {
+    if (!title || !description || !timer || !semester || !type) {
       return res.status(400).json({
         success: false,
         error: "Please provide all the required fields",
@@ -20,6 +22,8 @@ exports.createQuiz = async (req, res) => {
       title,
       description,
       timer,
+      semester,
+      type,
       createdBy: user.id,
     });
 
@@ -38,9 +42,10 @@ exports.createQuiz = async (req, res) => {
 };
 
 // ✅
+
 exports.updateQuiz = async (req, res) => {
   try {
-    const { title, description, timer } = req.body;
+    const { title, description, timer, semester, type } = req.body;
     const quiz = await Quiz.findById(req.params.id);
     if (!quiz) {
       return res
@@ -51,6 +56,8 @@ exports.updateQuiz = async (req, res) => {
     quiz.title = title;
     quiz.description = description;
     quiz.timer = timer;
+    quiz.semester = semester;
+    quiz.type = type;
 
     await quiz.save();
 
