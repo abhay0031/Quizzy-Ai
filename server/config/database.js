@@ -2,7 +2,8 @@ const mongoose = require("mongoose")
 require("dotenv").config();
 
 exports.connectToDB = () => {
-    mongoose.connect(process.env.DB_URL,{})
+    // mongoose.connect("mongodb+srv://Myusername:admin@mycluster.stkyauo.mongodb.net/quizzy?retryWrites=true&w=majority&appName=MyCluster",{})
+    mongoose.connect("mongodb://localhost:27017/quizzy",{})
     .then(() => {
         console.log("Database connection successfull")
     })
